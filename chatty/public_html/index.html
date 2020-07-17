@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<!--
+  Purpose: This is the main (and only) page for the Chatty application.
+  Author: Justin Nichols
+  Class: CSC337
+-->
+
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Justin Nichols">
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <title>Chatty</title>
+  </head>
+  <body>
+    <div id="output_area">
+      <div class="input_element">
+        <label for="input_alias"></label>
+        <textarea id="input_alias" class="msg"></textarea>
+      </div>
+      <div class="input_element">
+        <label for="input_msg"></label>
+        <textarea id="input_msg" class="msg"></textarea>
+      </div>
+      <div class="input_element">
+        <button value="Send Message" onclick="send()"></button>
+      </div> 
+    </div>
+    <div id="input_area">
+    </div>
+    <script src="communicator.js"></script>
+  </body>
+</html>
