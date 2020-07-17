@@ -1,0 +1,28 @@
+/*
+ * Purpose: This sheet stylizes the index.html page.
+ * Author: Justin Nichols
+ * Class: CSC337
+ */
+
+* {
+  margin: 0;   
+}
+
+html, body {
+  height: 100%;  
+}
+
+.input_area, .output_area {
+  position: fixed;
+  padding: 20px;
+}
+
+.output_area {
+  height: 70%;  
+  background-color: lightgreen;
+}
+
+.input_area {
+  height: 30%;
+  background-color: darkgreen;
+}
