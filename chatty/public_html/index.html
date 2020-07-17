@@ -10,24 +10,24 @@
   <head>
     <meta charset="UTF-8">
     <meta name="author" content="Justin Nichols">
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Chatty</title>
   </head>
   <body>
     <div id="output_area">
+    </div>
+    <div id="input_area">
       <div class="input_element">
-        <label for="input_alias"></label>
+        <label for="input_alias">Alias: </label>
         <textarea id="input_alias" class="msg"></textarea>
       </div>
       <div class="input_element">
-        <label for="input_msg"></label>
+        <label for="input_msg">Message: </label>
         <textarea id="input_msg" class="msg"></textarea>
       </div>
       <div class="input_element">
-        <button value="Send Message" onclick="send()"></button>
+        <button type='button' onclick="send()">Send Message</button>
       </div> 
-    </div>
-    <div id="input_area">
     </div>
     <script src="communicator.js"></script>
   </body>

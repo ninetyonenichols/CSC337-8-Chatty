@@ -12,17 +12,32 @@ html, body {
   height: 100%;  
 }
 
-.input_area, .output_area {
-  position: fixed;
-  padding: 20px;
+label {
+  display: inline-block;
+  vertical-align: top;
+  width: 80px;
+  background-color: silver;
+  color: blue;  
 }
 
-.output_area {
+.input_element {
+  padding: 10px 0;  
+}
+
+#input_area, #output_area {
+  position: fixed;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+#output_area {
+  top: 0;
   height: 70%;  
   background-color: lightgreen;
 }
 
-.input_area {
+#input_area {
   height: 30%;
+  bottom: 0;
   background-color: darkgreen;
 }
