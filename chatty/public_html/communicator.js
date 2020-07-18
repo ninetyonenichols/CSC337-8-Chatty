@@ -13,7 +13,7 @@ function buildMsgHist(result) {
   let msgs = JSON.parse(result);
   for (i in msgs) {
     let msg = msgs[i];  
-    msgHist += `<b>${msg.alias}</b>: ${msg.message} ${msg.time}<br>`;
+    msgHist += `<b>${msg.alias}</b>: ${msg.message}<br>`;
   }
   $('#output_area').html(msgHist);
 }
