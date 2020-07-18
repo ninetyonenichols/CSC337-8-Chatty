@@ -13,14 +13,14 @@ const port = 80;
 
 const app = express();
 const db = mongoose.connection;
-const mongoDBURL = `mongodb://${host}/chats`;
+const mongoDBURL = 'mongodb://localhost/chats';
 
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 var Schema = mongoose.Schema;
 var ChatMessageSchema = new Schema({
-  time: Number,
+  time: { type: Date, default: Date.now },
   alias: String,
   message: String
 });
@@ -28,7 +28,15 @@ var ChatMessage = mongoose.model('ChatMessage', ChatMessageSchema );
 
 app
   .use(express.static('public_html'))
-  .get('/chats', (req, res) => res.redirect('/index.html'))
-  .post('/chats/post', (req, res) => res.redirect('/'))
+  .get('/chats', (req, res) => {
+    var msg = mongoose.model('ChatMessage', ChatMessageSchema);
+    msg.find({})
+      .sort({time : 1})
+      .exec((error, results) => 
+        res.send(JSON.stringify(results))
+      );
+  })
+  .post('/chats/post', (req, res) => {
+    res.redirect('/'); })
   .all('*', (req, res) => res.redirect('/'))
   .listen(port, () => console.log('App listening'))
