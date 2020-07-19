@@ -1,5 +1,6 @@
 /*
  * Purpose: This server runs the Chatty application.
+            It manages the database and handles routing.
  * Author: Justin Nichols
  * Class: CSC337
  */
@@ -21,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect(mongoDBURL, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
+// This is the only schema in the DB.
+// It contains all of the data / metadata for one message in the chat.
 var Schema = mongoose.Schema;
 var ChatMessageSchema = new Schema({
   time: { type: Date, default: Date.now },
@@ -39,10 +42,16 @@ app
         res.send(JSON.stringify(results))
       );
   })
+  .get('/clear', (req, res) => {
+    db.dropDatabase();
+    mongoose.connect(mongoDBURL, { useNewUrlParser: true });
+    db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+    res.redirect('/');
+  })
   .post('/chats/post', (req, res) => {
     let msgObj = req.body;
     chatMsg = new ChatMessage({ alias: msgObj.alias, message: msgObj.msg });
-    chatMsg.save((err) => console.log('An error occurred.'));
+    chatMsg.save((err) => { if (err) { console.log('An error occurred.') }});
     })
   .all('*', (req, res) => res.redirect('/'))
   .listen(port, () => console.log('App listening'))

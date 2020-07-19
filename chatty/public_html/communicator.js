@@ -26,7 +26,7 @@ function update() {
     url: '/chats',
     method: 'GET',
     success: (result) => buildMsgHist(result)
-  })  
+  });  
 }
 
 setInterval(() => update(), 1000);
@@ -40,5 +40,15 @@ function send() {
     data: { alias: $('#input_alias').val(),
       msg: $('#input_msg').val() },
     method: 'POST'
+  });
+}
+
+/*
+ * This function clears the chat messages.
+ */
+function clearChat() {
+  $.ajax({
+    url: '/clear',
+    method: 'GET'
   });
 }
