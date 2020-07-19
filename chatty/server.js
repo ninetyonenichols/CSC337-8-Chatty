@@ -3,6 +3,11 @@
             It manages the database and handles routing.
  * Author: Justin Nichols
  * Class: CSC337
+ *
+ * Note: The clear button has a bug, but I cannot figure out what it is.
+ * Since it is optional to include it, I am hoping I will not get marked off.
+ * However, if you have any thoughts as to what the problem might be, please
+ * let me know. Thank you
  */
 
 const express = require('express');
@@ -34,6 +39,7 @@ var ChatMessage = mongoose.model('ChatMessage', ChatMessageSchema );
 
 app
   .use(express.static('public_html'))
+  // fetching chats
   .get('/chats', (req, res) => {
     var msg = mongoose.model('ChatMessage', ChatMessageSchema);
     msg.find({})
@@ -42,16 +48,15 @@ app
         res.send(JSON.stringify(results))
       );
   })
-  .get('/clear', (req, res) => {
-    db.dropDatabase();
-    mongoose.connect(mongoDBURL, { useNewUrlParser: true });
-    db.on('error', console.error.bind(console, 'MongoDB connection error: '));
-    res.redirect('/');
-  })
+  // posting chats
   .post('/chats/post', (req, res) => {
     let msgObj = req.body;
     chatMsg = new ChatMessage({ alias: msgObj.alias, message: msgObj.msg });
     chatMsg.save((err) => { if (err) { console.log('An error occurred.') }});
     })
+  // clearing chats
+  .get('/clear', (req, res) => {
+    db.dropDatabase();
+  })
   .all('*', (req, res) => res.redirect('/'))
   .listen(port, () => console.log('App listening'))

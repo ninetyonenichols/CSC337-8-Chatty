@@ -29,8 +29,6 @@ function update() {
   });  
 }
 
-setInterval(() => update(), 1000);
-
 /*
  * This function posts new messages to the chat.
  */
@@ -52,3 +50,5 @@ function clearChat() {
     method: 'GET'
   });
 }
+
+setInterval(() => update(), 1000);
